@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MonitorApp</string>
+    <string name="action_buscar" translatable="true">Search</string>
+    <string name="action_nuevo" translatable="true">New</string>
+    <string name="action_ordenar" translatable="true">Sort</string>
+    <string name="action_settings" translatable="true">Config</string>
+    <string name="action_sobre" translatable="true">About MonitorApp</string>
+    <string name="nombre">Name</string>
+    <string name="apellido">Lastname</string>
+    <string name="dni">ID number</string>
+    <string name="telefono">Phone</string>
+</resources>
