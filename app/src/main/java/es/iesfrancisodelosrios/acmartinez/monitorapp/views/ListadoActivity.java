@@ -26,6 +26,7 @@ public class ListadoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listado);
         Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle("MonitorApp");
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = findViewById(R.id.toADD);
