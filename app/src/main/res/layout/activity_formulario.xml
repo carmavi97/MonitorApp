@@ -6,82 +6,109 @@
     android:layout_height="match_parent"
     tools:context=".views.FormularioActivity">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="675dp"
-        android:background="?attr/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
+    <ScrollView
+        android:layout_width="409dp"
+        android:layout_height="729dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0">
 
-    <ImageButton
-        android:id="@+id/avatar"
-        android:layout_width="99dp"
-        android:layout_height="88dp"
-        android:layout_marginStart="129dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="130dp"
-        android:layout_marginBottom="496dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar2"
-        app:layout_constraintVertical_bias="0.0"
-        tools:src="@tools:sample/avatars" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="85dp"
-        android:layout_marginTop="60dp"
-        android:layout_marginEnd="18dp"
-        android:layout_marginBottom="476dp"
-        android:editable="false"
-        android:text="@string/nombre"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/textInputLayout"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/avatar"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="77dp"
-        android:layout_marginTop="27dp"
-        android:layout_marginBottom="430dp"
-        android:editable="false"
-        android:text="@string/apellido"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout"
-        android:layout_width="154dp"
-        android:layout_height="20dp"
-        android:layout_marginStart="17dp"
-        android:layout_marginTop="59dp"
-        android:layout_marginEnd="103dp"
-        android:layout_marginBottom="476dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView3"
-        app:layout_constraintTop_toBottomOf="@+id/avatar">
-
-        <com.google.android.material.textfield.TextInputEditText
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="hint" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:orientation="vertical" >
+
+            <ImageButton
+                android:id="@+id/imageAvatar"
+                android:layout_width="match_parent"
+                android:layout_height="167dp"
+                tools:srcCompat="@tools:sample/avatars[0]" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/nombre"
+                    android:drawableLeft="@android:drawable/ic_menu_myplaces"/>/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/lastName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/apellido"
+                    android:drawableLeft="@android:drawable/ic_menu_myplaces"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/email"
+                    android:drawableLeft="@android:drawable/ic_dialog_email"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/dni"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/dni"
+                    android:drawableLeft="@android:drawable/ic_lock_idle_lock"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/telefono"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/telefono"
+                    android:drawableLeft="@android:drawable/stat_sys_phone_call" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <CheckBox
+                android:id="@+id/checkBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/titulo" />
+
+            <EditText
+                android:id="@+id/date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/date"
+                android:inputType="date"
+                android:drawableLeft="@android:drawable/ic_menu_my_calendar"
+                />
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/aceptar" />
+        </LinearLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
