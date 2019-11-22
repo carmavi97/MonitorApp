@@ -1,14 +1,14 @@
 package es.iesfrancisodelosrios.acmartinez.monitorapp.interfaces;
 
-public interface ListadoInterface {
+public interface FormularioInterface {
 
     public interface View{
         void VOID();
 
-        void lanzarFormulario();
+        void lazarList();
     }
 
     public interface Presenter{
-        void onClickAdd();
+        void onClick();
     }
 }

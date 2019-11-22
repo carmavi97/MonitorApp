@@ -104,6 +104,11 @@
                 android:drawableLeft="@android:drawable/ic_menu_my_calendar"
                 />
 
+            <Spinner
+                android:id="@+id/seccion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
             <Button
                 android:id="@+id/button"
                 android:layout_width="match_parent"
