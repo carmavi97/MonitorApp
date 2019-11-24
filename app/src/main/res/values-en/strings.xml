@@ -13,4 +13,5 @@
     <string name="titulo">FTM</string>
     <string name="aceptar">Submit</string>
     <string name="date">Brith date</string>
+    <string name="cancel">Cancel</string>
 </resources>

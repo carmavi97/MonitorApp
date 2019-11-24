@@ -49,7 +49,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/apellido"
-                    android:drawableLeft="@android:drawable/ic_menu_myplaces"/>
+                    android:drawableLeft="@android:drawable/ic_menu_myplaces"
+                    android:inputType="text"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -61,7 +62,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/email"
-                    android:drawableLeft="@android:drawable/ic_dialog_email"/>
+                    android:drawableLeft="@android:drawable/ic_dialog_email"
+                    android:inputType="textEmailAddress"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -85,7 +87,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/telefono"
-                    android:drawableLeft="@android:drawable/stat_sys_phone_call" />
+                    android:drawableLeft="@android:drawable/stat_sys_phone_call"
+                    android:inputType="number"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <CheckBox
@@ -109,11 +112,25 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-            <Button
-                android:id="@+id/button"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/aceptar" />
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/acept"
+                    android:layout_width="214dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/aceptar" />
+
+                <Button
+                    android:id="@+id/cancel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/cancel" />
+            </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

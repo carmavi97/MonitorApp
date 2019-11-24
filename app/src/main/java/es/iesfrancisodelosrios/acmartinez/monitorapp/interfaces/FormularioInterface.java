@@ -6,9 +6,13 @@ public interface FormularioInterface {
         void VOID();
 
         void lazarList();
+
+        void add();
     }
 
     public interface Presenter{
-        void onClick();
+        void onClickAdd();
+        void cancel();
+        void add();
     }
 }
