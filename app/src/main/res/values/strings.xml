@@ -15,4 +15,7 @@
     <string name="aceptar">Aceptar</string>
     <string name="date">Fecha de nacimiento</string>
     <string name="cancel">Cancelar</string>
+    <string name="add">Añadir</string>
+    <string name="add_new_option">Añadir nueva seccion</string>
+    <string name="your_option">Nueva seccion:</string>
 </resources>

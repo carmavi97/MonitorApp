@@ -101,16 +101,28 @@
                 android:id="@+id/date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:drawableLeft="@android:drawable/ic_menu_my_calendar"
                 android:ems="10"
                 android:hint="@string/date"
-                android:inputType="date"
-                android:drawableLeft="@android:drawable/ic_menu_my_calendar"
-                />
+                android:inputType="date" />
 
-            <Spinner
-                android:id="@+id/seccion"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <Spinner
+                    android:id="@+id/seccion"
+                    android:layout_width="211dp"
+                    android:layout_height="wrap_content" />
+
+                <Button
+                    android:id="@+id/addSpinner"
+                    android:layout_width="137dp"
+                    android:layout_height="37dp"
+                    android:layout_weight="1"
+                    android:text="@string/add" />
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"

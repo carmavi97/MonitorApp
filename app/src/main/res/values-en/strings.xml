@@ -11,7 +11,10 @@
     <string name="dni">ID number</string>
     <string name="telefono">Phone</string>
     <string name="titulo">FTM</string>
-    <string name="aceptar">Submit</string>
+    <string name="aceptar">Accept</string>
     <string name="date">Brith date</string>
     <string name="cancel">Cancel</string>
+    <string name="add">Add</string>
+    <string name="add_new_option">Add new</string>
+    <string name="your_option">Your new:</string>
 </resources>
