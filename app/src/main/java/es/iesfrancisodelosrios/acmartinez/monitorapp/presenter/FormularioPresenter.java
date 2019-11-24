@@ -1,5 +1,7 @@
 package es.iesfrancisodelosrios.acmartinez.monitorapp.presenter;
 
+import android.widget.EditText;
+
 import es.iesfrancisodelosrios.acmartinez.monitorapp.interfaces.FormularioInterface;
 
 public class FormularioPresenter implements FormularioInterface.Presenter {
@@ -24,4 +26,11 @@ public class FormularioPresenter implements FormularioInterface.Presenter {
     public void add() {
         view.add();
     }
+/*
+    @Override
+    public void markDate(EditText date){
+        view.showDatePickerDialog(date);
+    }
+*/
 }
+

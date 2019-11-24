@@ -18,4 +18,6 @@
     <string name="add">Añadir</string>
     <string name="add_new_option">Añadir nueva seccion</string>
     <string name="your_option">Nueva seccion:</string>
+    <string name="exit">Salir</string>
+    <string name="toExit">¿Desea salir?</string>
 </resources>

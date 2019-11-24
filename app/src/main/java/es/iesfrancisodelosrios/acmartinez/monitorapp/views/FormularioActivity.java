@@ -3,6 +3,7 @@ package es.iesfrancisodelosrios.acmartinez.monitorapp.views;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -11,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 
@@ -88,6 +90,17 @@ public class FormularioActivity extends AppCompatActivity {
                         .show();
             }
         });
+        final EditText date = (EditText) findViewById(R.id.date);
+        date.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switch (v.getId()) {
+                    case R.id.date:
+                        showDatePickerDialog(date);
+                        break;
+                }
+            }
+        });
     }
     @Override
     protected void onStart() {
@@ -114,11 +127,26 @@ public class FormularioActivity extends AppCompatActivity {
         super.onDestroy();
     }
 
-    private void lazarList(){
-        Intent intent=new Intent(FormularioActivity.this,
-                ListadoActivity.class);
-        startActivity(intent);
-        this.onDestroy();
+    private void exit(){
+        LayoutInflater layoutActivity = LayoutInflater.from(myContext);
+        View viewAlertDialog = layoutActivity.inflate(R.layout.alert_exit, null);
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(
+                myContext);
+        alertDialog
+                .setCancelable(false)
+                .setPositiveButton("Yes",new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,int id) {
+                        FormularioActivity.this.finish();
+                    }
+                })
+                .setNegativeButton("No",new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,int id) {
+                        dialog.cancel();
+                    }
+                })
+            .create()
+            .show();
+
     }
 
     public void add(){
@@ -126,5 +154,18 @@ public class FormularioActivity extends AppCompatActivity {
                 ListadoActivity.class);
         startActivity(intent);
         this.onDestroy();
+    }
+
+    public void showDatePickerDialog(final EditText date) {
+        DatePickerFragment newFragment = DatePickerFragment.newInstance(new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                // +1 because January is zero
+                final String selectedDate = day + " / " + (month+1) + " / " + year;
+                date.setText(selectedDate);
+            }
+        });
+
+        newFragment.show(getSupportFragmentManager(), "datePicker");
     }
 }

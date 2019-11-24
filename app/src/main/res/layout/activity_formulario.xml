@@ -63,7 +63,8 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/email"
                     android:drawableLeft="@android:drawable/ic_dialog_email"
-                    android:inputType="textEmailAddress"/>
+                    android:inputType="textEmailAddress"
+                    />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -102,6 +103,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableLeft="@android:drawable/ic_menu_my_calendar"
+                android:editable="false"
                 android:ems="10"
                 android:hint="@string/date"
                 android:inputType="date" />

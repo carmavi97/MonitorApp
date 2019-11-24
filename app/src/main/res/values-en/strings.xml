@@ -17,4 +17,6 @@
     <string name="add">Add</string>
     <string name="add_new_option">Add new</string>
     <string name="your_option">Your new:</string>
+    <string name="exit">Exit</string>
+    <string name="toExit">Wish yo exit?</string>
 </resources>
