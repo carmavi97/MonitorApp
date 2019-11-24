@@ -20,4 +20,5 @@
     <string name="your_option">Nueva seccion:</string>
     <string name="exit">Salir</string>
     <string name="toExit">¿Desea salir?</string>
+    <string name="creatror">Creador</string>
 </resources>

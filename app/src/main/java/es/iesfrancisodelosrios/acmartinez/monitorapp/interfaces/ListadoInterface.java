@@ -6,9 +6,15 @@ public interface ListadoInterface {
         void VOID();
 
         void lanzarFormulario();
+
+        void search();
+
+        void about();
     }
 
     public interface Presenter{
         void onClickAdd();
+        void search();
+        void about();
     }
 }

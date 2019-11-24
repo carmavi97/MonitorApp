@@ -17,5 +17,6 @@ public interface FormularioInterface {
         void cancel();
         void add();
         //void markDate(EditText date);
+        void match();
     }
 }

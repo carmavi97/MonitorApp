@@ -1,5 +1,6 @@
 package es.iesfrancisodelosrios.acmartinez.monitorapp.views;
 
+import android.content.ClipData;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -10,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 import es.iesfrancisodelosrios.acmartinez.monitorapp.R;
@@ -29,6 +31,7 @@ public class ListadoActivity extends AppCompatActivity {
         toolbar.setTitle("MonitorApp");
         setSupportActionBar(toolbar);
 
+
         FloatingActionButton fab = findViewById(R.id.toADD);
         fab.setOnClickListener(new android.view.View.OnClickListener(){
             @Override
@@ -36,6 +39,8 @@ public class ListadoActivity extends AppCompatActivity {
                 lanzarAdd();
             }
         });
+
+
     }
 
     @Override
@@ -43,6 +48,21 @@ public class ListadoActivity extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_buscar:
+                presenter.search();
+                return true;
+            case R.id.action_Sobre:
+
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     @Override
@@ -73,6 +93,20 @@ public class ListadoActivity extends AppCompatActivity {
     private void lanzarAdd(){
         Intent intent=new Intent(ListadoActivity.this,
                 FormularioActivity.class);
+        startActivity(intent);
+    }
+
+    public void search(){
+        Intent intent=new Intent(ListadoActivity.this,
+                SearchActivity.class);
+        this.onPause();
+        startActivity(intent);
+    }
+
+    public void about(){
+        Intent intent=new Intent(ListadoActivity.this,
+                AboutUsActivity.class);
+        this.onPause();
         startActivity(intent);
     }
 }

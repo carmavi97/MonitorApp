@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".views.FormularioActivity"></activity>
+        <activity android:name=".views.SearchActivity"></activity>
+        <activity android:name=".views.AboutUsActivity" />
+        <activity android:name=".views.FormularioActivity" />
         <activity
             android:name=".views.ListadoActivity"
             android:label="@string/title_activity_listado"

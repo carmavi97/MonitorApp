@@ -26,7 +26,12 @@ public class FormularioPresenter implements FormularioInterface.Presenter {
     public void add() {
         view.add();
     }
-/*
+
+    @Override
+    public void match() {
+        //view.match();
+    }
+    /*
     @Override
     public void markDate(EditText date){
         view.showDatePickerDialog(date);

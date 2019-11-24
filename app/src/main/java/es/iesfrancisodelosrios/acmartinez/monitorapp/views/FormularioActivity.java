@@ -8,6 +8,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.PatternMatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -16,7 +18,12 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
+
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import es.iesfrancisodelosrios.acmartinez.monitorapp.R;
 import es.iesfrancisodelosrios.acmartinez.monitorapp.presenter.FormularioPresenter;
@@ -101,6 +108,27 @@ public class FormularioActivity extends AppCompatActivity {
                 }
             }
         });
+        TextInputEditText nombreEditText = (TextInputEditText) findViewById(R.id.email);
+        nombreEditText.setOnFocusChangeListener(new View.OnFocusChangeListener(){
+
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    TextInputEditText et = (TextInputEditText) v;
+                    Log.d("AppCRUD", et.getText().toString());
+                    Pattern pattern = Pattern.compile("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$");
+                    Matcher matcher = pattern.matcher(et.getText().toString());
+                    if (matcher.find()) {
+                        TextInputLayout nombreInputLayout = (TextInputLayout) findViewById(R.id.nombreInputLayout);
+                        nombreInputLayout.setError("");
+                    } else {
+                        TextInputLayout nombreInputLayout = (TextInputLayout) findViewById(R.id.nombreInputLayout);
+                        nombreInputLayout.setError("E-mail no valido");
+                    }
+                }
+            }
+        });
+
     }
     @Override
     protected void onStart() {
@@ -168,4 +196,26 @@ public class FormularioActivity extends AppCompatActivity {
 
         newFragment.show(getSupportFragmentManager(), "datePicker");
     }
+    /*
+    public void match(){
+        @Override
+        public void onFocusChange(View v, boolean hasFocus) {
+            if (!hasFocus) {
+                TextInputEditText et = (TextInputEditText) v;
+                Log.d("AppCRUD", et.getText().toString());
+                Pattern pattern = Pattern.compile("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$");
+                Matcher matcher = pattern.matcher(et.getText().toString());
+                if (matcher.find()) {
+                    TextInputLayout nombreInputLayout = (TextInputLayout) findViewById(R.id.nombreInputLayout);
+                    nombreInputLayout.setError("");
+                } else {
+                    TextInputLayout nombreInputLayout = (TextInputLayout) findViewById(R.id.nombreInputLayout);
+                    nombreInputLayout.setError("E-mail no valido");
+                }
+            }
+        }
+    }
+    */
+
+
 }

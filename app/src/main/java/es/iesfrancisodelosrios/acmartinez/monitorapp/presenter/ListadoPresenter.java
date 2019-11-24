@@ -12,4 +12,15 @@ public class ListadoPresenter implements ListadoInterface.Presenter{
     public void onClickAdd() {
         view.lanzarFormulario();
     }
+
+    @Override
+    public void search() {
+        view.search();
+    }
+
+    @Override
+    public void about() {
+        view.about();
+    }
+
 }
