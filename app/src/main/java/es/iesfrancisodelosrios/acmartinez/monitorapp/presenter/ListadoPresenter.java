@@ -1,11 +1,19 @@
 package es.iesfrancisodelosrios.acmartinez.monitorapp.presenter;
 
+import java.util.ArrayList;
+
 import es.iesfrancisodelosrios.acmartinez.monitorapp.interfaces.ListadoInterface;
+
+import es.iesfrancisodelosrios.acmartinez.monitorapp.model.Person;
+import es.iesfrancisodelosrios.acmartinez.monitorapp.model.PersonModel;
+
 public class ListadoPresenter implements ListadoInterface.Presenter{
     private ListadoInterface.View view;
+    private PersonModel person;
 
     public ListadoPresenter(ListadoInterface.View view) {
         this.view = view;
+        this.person=new PersonModel();
     }
 
     @Override
@@ -23,4 +31,8 @@ public class ListadoPresenter implements ListadoInterface.Presenter{
         view.about();
     }
 
+    @Override
+    public ArrayList<Person> getAllPeople(){
+        return person.getAllPersons();
+    }
 }
