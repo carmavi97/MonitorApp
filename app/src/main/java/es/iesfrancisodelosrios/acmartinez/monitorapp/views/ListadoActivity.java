@@ -9,6 +9,8 @@ import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,10 +20,13 @@ import es.iesfrancisodelosrios.acmartinez.monitorapp.R;
 import es.iesfrancisodelosrios.acmartinez.monitorapp.interfaces.ListadoInterface;
 import es.iesfrancisodelosrios.acmartinez.monitorapp.presenter.ListadoPresenter;
 
-public class ListadoActivity extends AppCompatActivity {
+public class ListadoActivity extends AppCompatActivity implements ListadoInterface.View{
 
 
     private ListadoInterface.Presenter presenter;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,13 +35,24 @@ public class ListadoActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("MonitorApp");
         setSupportActionBar(toolbar);
+        presenter= new ListadoPresenter(this);
+        // Inicializa el RecyclerView
+        final RecyclerView recyclerView = (RecyclerView) findViewById(R.id.Lista);
 
+        // Crea el Adaptador con los datos de la lista anterior
+        AcontecimientoAdapter adaptador = new AcontecimientoAdapter(presenter.getAllPeople());
+
+        // Asocia el Adaptador al RecyclerView
+        recyclerView.setAdapter(adaptador);
+
+        // Muestra el RecyclerView en vertical
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         FloatingActionButton fab = findViewById(R.id.toADD);
         fab.setOnClickListener(new android.view.View.OnClickListener(){
             @Override
             public void onClick(android.view.View view) {
-                lanzarAdd();
+                lanzarFormulario();
             }
         });
 
@@ -90,7 +106,14 @@ public class ListadoActivity extends AppCompatActivity {
         super.onDestroy();
     }
 
-    private void lanzarAdd(){
+
+    @Override
+    public void VOID() {
+
+    }
+
+    @Override
+    public void lanzarFormulario() {
         Intent intent=new Intent(ListadoActivity.this,
                 FormularioActivity.class);
         startActivity(intent);
