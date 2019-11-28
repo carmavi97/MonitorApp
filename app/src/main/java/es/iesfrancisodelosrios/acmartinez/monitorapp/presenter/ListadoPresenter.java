@@ -17,8 +17,8 @@ public class ListadoPresenter implements ListadoInterface.Presenter{
     }
 
     @Override
-    public void onClickAdd() {
-        view.lanzarFormulario();
+    public void onClickAdd(Integer id) {
+        view.lanzarFormulario(-1);
     }
 
     @Override

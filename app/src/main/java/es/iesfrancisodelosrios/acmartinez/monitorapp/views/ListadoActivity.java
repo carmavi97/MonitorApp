@@ -12,21 +12,25 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import java.util.ArrayList;
+
 import es.iesfrancisodelosrios.acmartinez.monitorapp.R;
 import es.iesfrancisodelosrios.acmartinez.monitorapp.interfaces.ListadoInterface;
+import es.iesfrancisodelosrios.acmartinez.monitorapp.model.Person;
 import es.iesfrancisodelosrios.acmartinez.monitorapp.presenter.ListadoPresenter;
 
 public class ListadoActivity extends AppCompatActivity implements ListadoInterface.View{
 
 
     private ListadoInterface.Presenter presenter;
-
-
-
+    private AcontecimientoAdapter adaptador;
+    private ArrayList<Person> items=new ArrayList<Person>();
+    private String TAG="MonitorApp";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +44,19 @@ public class ListadoActivity extends AppCompatActivity implements ListadoInterfa
         final RecyclerView recyclerView = (RecyclerView) findViewById(R.id.Lista);
 
         // Crea el Adaptador con los datos de la lista anterior
-        AcontecimientoAdapter adaptador = new AcontecimientoAdapter(presenter.getAllPeople());
+        items= presenter.getAllPeople();
+        adaptador = new AcontecimientoAdapter(presenter.getAllPeople());
+
+        // Asocia el elemento de la lista con una acción al ser pulsado
+        adaptador.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Acción al pulsar el elemento
+                int position = recyclerView.getChildAdapterPosition(v);
+                Log.d(TAG,"Click RV: "+ position+": "+String.valueOf(items.get(position).getId()));
+                presenter.onClickAdd(items.get(position).getId());
+            }
+        });
 
         // Asocia el Adaptador al RecyclerView
         recyclerView.setAdapter(adaptador);
@@ -52,7 +68,7 @@ public class ListadoActivity extends AppCompatActivity implements ListadoInterfa
         fab.setOnClickListener(new android.view.View.OnClickListener(){
             @Override
             public void onClick(android.view.View view) {
-                lanzarFormulario();
+                lanzarFormulario(-1);
             }
         });
 
@@ -113,7 +129,12 @@ public class ListadoActivity extends AppCompatActivity implements ListadoInterfa
     }
 
     @Override
-    public void lanzarFormulario() {
+    public void lanzarFormulario(int id) {
+        if(id==-1){
+            Intent intent=new Intent(ListadoActivity.this,
+                    FormularioActivity.class);
+            startActivity(intent);
+        }
         Intent intent=new Intent(ListadoActivity.this,
                 FormularioActivity.class);
         startActivity(intent);

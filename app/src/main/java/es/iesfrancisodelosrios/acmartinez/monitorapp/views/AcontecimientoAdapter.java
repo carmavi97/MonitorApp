@@ -76,6 +76,7 @@ public class AcontecimientoAdapter extends RecyclerView.Adapter<AcontecimientoAd
     public static class AcontecimientoViewHolder
             extends RecyclerView.ViewHolder {
 
+        private final TextView TextView_email;
         private TextView TextView_id;
         private TextView TextView_nombre;
 
@@ -83,10 +84,12 @@ public class AcontecimientoAdapter extends RecyclerView.Adapter<AcontecimientoAd
             super(itemView);
             TextView_id = (TextView) itemView.findViewById(R.id.id);
             TextView_nombre = (TextView) itemView.findViewById(R.id.name);
+            TextView_email = (TextView) itemView.findViewById(R.id.email);
         }
 
-        public void AcontecimientoBind(Person item) {
-            TextView_id.setText(item.getId());
+        public void AcontecimientoBind(@org.jetbrains.annotations.NotNull Person item) {
+            TextView_id.setText(item.getId().toString());
+            TextView_email.setText(item.getEmail());
             TextView_nombre.setText(item.getFullname());
         }
     }

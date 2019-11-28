@@ -9,7 +9,7 @@ public interface ListadoInterface {
     public interface View{
         void VOID();
 
-        void lanzarFormulario();
+        void lanzarFormulario(int id);
 
         void search();
 
@@ -17,7 +17,7 @@ public interface ListadoInterface {
     }
 
     public interface Presenter{
-        void onClickAdd();
+        void onClickAdd(Integer id);
         void search();
         void about();
         ArrayList<Person> getAllPeople();
