@@ -1,8 +1,12 @@
 package es.iesfrancisodelosrios.acmartinez.monitorapp.views;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -79,18 +83,28 @@ public class AcontecimientoAdapter extends RecyclerView.Adapter<AcontecimientoAd
         private final TextView TextView_email;
         private TextView TextView_id;
         private TextView TextView_nombre;
+        private ImageView imageImageView;
 
         public AcontecimientoViewHolder(View itemView) {
             super(itemView);
             TextView_id = (TextView) itemView.findViewById(R.id.id);
             TextView_nombre = (TextView) itemView.findViewById(R.id.name);
             TextView_email = (TextView) itemView.findViewById(R.id.email);
+            imageImageView = (ImageView) itemView.findViewById(R.id.imageView);
         }
 
         public void AcontecimientoBind(@org.jetbrains.annotations.NotNull Person item) {
             TextView_id.setText(item.getId().toString());
             TextView_email.setText(item.getEmail());
             TextView_nombre.setText(item.getFullname());
+            if(item.getPhoto()!=null) {
+                byte[] decodedString = Base64.decode(item.getPhoto(), Base64.DEFAULT);
+                Bitmap decodedByte = BitmapFactory.decodeByteArray(
+                        decodedString,
+                        0,
+                        decodedString.length);
+                imageImageView.setImageBitmap(decodedByte);
+            }
         }
     }
 }

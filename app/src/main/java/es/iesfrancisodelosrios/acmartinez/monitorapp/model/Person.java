@@ -4,13 +4,14 @@ public class Person {
     private Integer id=null;
     private String photo=null;
     private String email=null;
-    private String fullname=null;
+    private String name=null;
 
-    public Person(String email, String photo, String fullname, Integer id){
+
+    public Person(String email, String photo, String name, Integer id){
         this.id=id;
         this.email=email;
         this.photo=photo;
-        this.fullname=fullname;
+        this.name=name;
     }
 
     public Person(Integer id) {
@@ -20,14 +21,21 @@ public class Person {
     public Person(String email, String fullname, Integer id){
         this.id=id;
         this.email=email;
-        this.fullname=fullname;
+        this.name=fullname;
     }
+
+    public Person(String email, String fullname, Integer id,String img){
+        this.id=id;
+        this.email=email;
+        this.name=fullname;
+    }
+
 
     public Person() {
 
     }
 
-    public String getphoto() {
+    public String getPhoto() {
         return photo;
     }
 
@@ -47,16 +55,18 @@ public class Person {
         this.email = email;
     }
 
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
+
     public String getFullname() {
-        return fullname;
+        return name;
     }
 
     public void setFullname(String fullname) {
-        this.fullname = fullname;
+        this.name = fullname;
     }
 
-    public void setFoto(String photo) {
-        this.photo = photo;
-    }
+
 }
 
