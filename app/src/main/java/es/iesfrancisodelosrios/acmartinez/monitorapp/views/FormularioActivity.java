@@ -2,11 +2,16 @@ package es.iesfrancisodelosrios.acmartinez.monitorapp.views;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.PatternMatcher;
 import android.util.Log;
@@ -16,8 +21,10 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -26,19 +33,23 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import es.iesfrancisodelosrios.acmartinez.monitorapp.R;
+import es.iesfrancisodelosrios.acmartinez.monitorapp.interfaces.FormularioInterface;
 import es.iesfrancisodelosrios.acmartinez.monitorapp.presenter.FormularioPresenter;
 
-public class FormularioActivity extends AppCompatActivity {
+public class FormularioActivity extends AppCompatActivity implements FormularioInterface.View {
 
     private FormularioPresenter presenter;
     private Context myContext;
+    final private int CODE_READ_EXTERNAL_STORAGE_PERMISION=1234;
+    private ImageButton img;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         myContext=this;
         setContentView(R.layout.activity_formulario);
-
+        presenter=new FormularioPresenter(this);
         Button cancel=findViewById(R.id.cancel);
         cancel.setOnClickListener(new android.view.View.OnClickListener(){
             @Override
@@ -51,6 +62,14 @@ public class FormularioActivity extends AppCompatActivity {
             @Override
             public void onClick(android.view.View view) {
                 presenter.add();
+            }
+        });
+
+        img= (ImageButton) findViewById(R.id.imageAvatar);
+        img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.onClickAddImage(myContext);
             }
         });
 
@@ -177,12 +196,42 @@ public class FormularioActivity extends AppCompatActivity {
 
     }
 
-    public void add(){
+    @Override
+    public void VOID() {
+
+    }
+
+    @Override
+    public void lazarList() {
+        LayoutInflater layoutActivity = LayoutInflater.from(myContext);
+        View viewAlertDialog = layoutActivity.inflate(R.layout.alert_exit, null);
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(
+                myContext);
+        alertDialog
+                .setCancelable(false)
+                .setPositiveButton("Yes",new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,int id) {
+                        FormularioActivity.this.finish();
+                    }
+                })
+                .setNegativeButton("No",new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,int id) {
+                        dialog.cancel();
+                    }
+                })
+                .create()
+                .show();
+
+    }
+
+    @Override
+    public void add() {
         Intent intent=new Intent(FormularioActivity.this ,
                 ListadoActivity.class);
         startActivity(intent);
         this.onDestroy();
     }
+
 
     public void showDatePickerDialog(final EditText date) {
         DatePickerFragment newFragment = DatePickerFragment.newInstance(new DatePickerDialog.OnDateSetListener() {
@@ -196,6 +245,36 @@ public class FormularioActivity extends AppCompatActivity {
 
         newFragment.show(getSupportFragmentManager(), "datePicker");
     }
+    @Override
+    public void requestPermision(){
+        ActivityCompat.requestPermissions(
+                FormularioActivity.this,new String[] {Manifest.permission.READ_EXTERNAL_STORAGE},
+            CODE_READ_EXTERNAL_STORAGE_PERMISION
+        );
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        switch (requestCode) {
+            case CODE_READ_EXTERNAL_STORAGE_PERMISION:
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Log.d("AppCRUD", "aceptado");
+                    //lazar galeria
+                } else {
+                    Log.d("AppCRUD", "rechazado");
+                    //view.showError Snackbar.make(constraintLayoutMainActivity, getResources().getString(R.string.read_permission_accepted), Snackbar.LENGTH_LONG).show();
+                }
+                break;
+            default:
+                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+    }
+
+
+
+
+
+
     /*
     public void match(){
         @Override

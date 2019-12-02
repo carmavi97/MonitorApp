@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="es.iesfrancisodelosrios.acmartinez.monitorapp">
 
+    <uses-permission android:name="andorid.permision.INTERNET" />
+    <uses-permission android:name="andorid.permision.READ_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"

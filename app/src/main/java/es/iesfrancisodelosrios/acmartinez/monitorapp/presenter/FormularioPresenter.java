@@ -1,6 +1,12 @@
 package es.iesfrancisodelosrios.acmartinez.monitorapp.presenter;
 
+import android.Manifest;
+import android.content.Context;
+import android.content.pm.PackageManager;
+import android.util.Log;
 import android.widget.EditText;
+
+import androidx.core.content.ContextCompat;
 
 import es.iesfrancisodelosrios.acmartinez.monitorapp.interfaces.FormularioInterface;
 
@@ -30,6 +36,17 @@ public class FormularioPresenter implements FormularioInterface.Presenter {
     @Override
     public void match() {
         //view.match();
+    }
+
+    @Override
+    public void onClickAddImage(Context myContext) {
+        int ReadPremission= ContextCompat.checkSelfPermission(
+                myContext,
+                Manifest.permission.READ_EXTERNAL_STORAGE
+        );
+        if (ReadPremission != PackageManager.PERMISSION_GRANTED){
+            view.requestPermision();
+        }
     }
     /*
     @Override
