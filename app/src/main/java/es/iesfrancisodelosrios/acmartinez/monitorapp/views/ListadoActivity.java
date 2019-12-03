@@ -130,6 +130,11 @@ public class ListadoActivity extends AppCompatActivity implements ListadoInterfa
 
     @Override
     public void lanzarFormulario(int id) {
+        if(id==-1){
+            Intent intent=new Intent(ListadoActivity.this,
+                    FormularioActivity.class);
+            startActivity(intent);
+        }
         Intent intent=new Intent(ListadoActivity.this,
                 FormularioActivity.class);
         startActivity(intent);
