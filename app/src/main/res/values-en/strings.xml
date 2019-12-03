@@ -20,4 +20,5 @@
     <string name="exit">Exit</string>
     <string name="toExit">Wish yo exit?</string>
     <string name="creatror">Creator</string>
+    <string name="choose_picture">Chose a picture</string>
 </resources>
