@@ -270,7 +270,7 @@ public class FormularioActivity extends AppCompatActivity implements FormularioI
             case CODE_READ_EXTERNAL_STORAGE_PERMISION:
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     Log.d("AppCRUD", "aceptado");
-                    this.selectPicture();
+                    //1this.selectPicture();
                 } else {
                     Log.d("AppCRUD", "rechazado");
                     //view.showError Snackbar.make(constraintLayoutMainActivity, getResources().getString(R.string.read_permission_accepted), Snackbar.LENGTH_LONG).show();
@@ -280,7 +280,7 @@ public class FormularioActivity extends AppCompatActivity implements FormularioI
                 super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         }
     }
-
+/*
     private void selectPicture(){
         // Se le pide al sistema una imagen del dispositivo
         Intent intent = new Intent();
@@ -290,7 +290,7 @@ public class FormularioActivity extends AppCompatActivity implements FormularioI
                 Intent.createChooser(intent, getResources().getString(R.string.choose_picture)),
                 REQUEST_SELECT_IMAGE);
     }
-
+*/
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
