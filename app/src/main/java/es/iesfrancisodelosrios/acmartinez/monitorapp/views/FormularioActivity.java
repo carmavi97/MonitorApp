@@ -3,7 +3,6 @@ package es.iesfrancisodelosrios.acmartinez.monitorapp.views;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.app.Activity;
@@ -12,8 +11,11 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
-import android.os.PatternMatcher;
+import android.os.Environment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,11 +26,15 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 
-import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -42,6 +48,11 @@ public class FormularioActivity extends AppCompatActivity implements FormularioI
     private Context myContext;
     final private int CODE_READ_EXTERNAL_STORAGE_PERMISION=1234;
     private ImageButton img;
+    private static final int REQUEST_CAPTURE_IMAGE = 200;
+    private static final int REQUEST_SELECT_IMAGE = 201;
+    final String pathFotos = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES) + "/demoAndroidImages/";
+    private Uri uri;
+    private String TAG = "MonitorApp";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -259,7 +270,7 @@ public class FormularioActivity extends AppCompatActivity implements FormularioI
             case CODE_READ_EXTERNAL_STORAGE_PERMISION:
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     Log.d("AppCRUD", "aceptado");
-                    //lazar galeria
+                    this.selectPicture();
                 } else {
                     Log.d("AppCRUD", "rechazado");
                     //view.showError Snackbar.make(constraintLayoutMainActivity, getResources().getString(R.string.read_permission_accepted), Snackbar.LENGTH_LONG).show();
@@ -270,7 +281,72 @@ public class FormularioActivity extends AppCompatActivity implements FormularioI
         }
     }
 
+    private void selectPicture(){
+        // Se le pide al sistema una imagen del dispositivo
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(
+                Intent.createChooser(intent, getResources().getString(R.string.choose_picture)),
+                REQUEST_SELECT_IMAGE);
+    }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+
+            case (REQUEST_CAPTURE_IMAGE):
+                if(resultCode == Activity.RESULT_OK){
+                    // Se carga la imagen desde un objeto URI al imageView
+                    ImageButton imageButton = findViewById(R.id.imageAvatar);
+                    imageButton.setImageURI(uri);
+
+                    // Se le envía un broadcast a la Galería para que se actualice
+                    Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+                    mediaScanIntent.setData(uri);
+                    sendBroadcast(mediaScanIntent);
+                } else if (resultCode == Activity.RESULT_CANCELED) {
+                    // Se borra el archivo temporal
+                    File file = new File(uri.getPath());
+                    file.delete();
+                }
+                break;
+
+            case (REQUEST_SELECT_IMAGE):
+                if (resultCode == Activity.RESULT_OK) {
+                    // Se carga la imagen desde un objeto Bitmap
+                    Uri selectedImage = data.getData();
+                    String selectedPath = selectedImage.getPath();
+
+                    if (selectedPath != null) {
+                        // Se leen los bytes de la imagen
+                        InputStream imageStream = null;
+                        try {
+                            imageStream = getContentResolver().openInputStream(selectedImage);
+                        } catch (FileNotFoundException e) {
+                            e.printStackTrace();
+                        }
+
+                        // Se transformam los bytes de la imagen a un Bitmap
+                        Bitmap bmp = BitmapFactory.decodeStream(imageStream);
+
+                        // Se carga el Bitmap en el ImageView
+                        ImageButton imageButton = findViewById(R.id.imageAvatar);
+                        imageButton.setImageBitmap(bmp);
+                    }
+                }
+                break;
+        }
+    }
+
+    private String getFileCode()
+    {
+        // Se crea un código a partir de la fecha y hora
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyymmddhhmmss", java.util.Locale.getDefault());
+        String date = dateFormat.format(new Date());
+        // Se devuelve el código
+        return "pic_" + date;
+    }
 
 
 
