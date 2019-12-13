@@ -48,6 +48,11 @@ public class FormularioPresenter implements FormularioInterface.Presenter {
             view.requestPermision();
         }
     }
+
+    @Override
+    public void selectImg() {
+        view.selectPicture();
+    }
     /*
     @Override
     public void markDate(EditText date){

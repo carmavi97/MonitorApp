@@ -12,6 +12,7 @@ public interface FormularioInterface {
         void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults);
         void add();
         void requestPermision();
+        void selectPicture();
     }
 
     public interface Presenter{
@@ -21,5 +22,6 @@ public interface FormularioInterface {
         //void markDate(EditText date);
         void match();
         void onClickAddImage(Context myContext);
+        void selectImg();
     }
 }
