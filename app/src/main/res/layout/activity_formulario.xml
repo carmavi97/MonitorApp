@@ -7,8 +7,8 @@
     tools:context=".views.FormularioActivity">
 
     <ScrollView
-        android:layout_width="409dp"
-        android:layout_height="729dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -19,7 +19,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
             <ImageButton
                 android:id="@+id/imageAvatar"
@@ -35,8 +35,8 @@
                     android:id="@+id/name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/nombre"
-                    android:drawableLeft="@android:drawable/ic_menu_myplaces"/>/>
+                    android:drawableLeft="@android:drawable/ic_menu_myplaces"
+                    android:hint="@string/nombre" />/>
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -48,9 +48,9 @@
                     android:id="@+id/lastName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/apellido"
                     android:drawableLeft="@android:drawable/ic_menu_myplaces"
-                    android:inputType="text"/>
+                    android:hint="@string/apellido"
+                    android:inputType="text" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -75,8 +75,8 @@
                     android:id="@+id/dni"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/dni"
-                    android:drawableLeft="@android:drawable/ic_lock_idle_lock"/>
+                    android:drawableLeft="@android:drawable/ic_lock_idle_lock"
+                    android:hint="@string/dni" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -87,9 +87,9 @@
                     android:id="@+id/telefono"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/telefono"
                     android:drawableLeft="@android:drawable/stat_sys_phone_call"
-                    android:inputType="number"/>
+                    android:hint="@string/telefono"
+                    android:inputType="number" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <CheckBox

@@ -14,6 +14,8 @@ public interface ListadoInterface {
         void search();
 
         void about();
+
+        void showDeleteItemDialog(int id);
     }
 
     public interface Presenter{
@@ -21,5 +23,6 @@ public interface ListadoInterface {
         void search();
         void about();
         ArrayList<Person> getAllPeople();
+        void onItemSwipped(int id);
     }
 }

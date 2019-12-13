@@ -1,14 +1,17 @@
 package es.iesfrancisodelosrios.acmartinez.monitorapp.views;
 
 import android.content.ClipData;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,6 +19,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -72,7 +76,9 @@ public class ListadoActivity extends AppCompatActivity implements ListadoInterfa
             }
         });
 
-
+        SwipeController swipeController = new SwipeController(this);
+        ItemTouchHelper itemTouchhelper = new ItemTouchHelper(swipeController);
+        itemTouchhelper.attachToRecyclerView(recyclerView);
     }
 
     @Override
@@ -128,6 +134,10 @@ public class ListadoActivity extends AppCompatActivity implements ListadoInterfa
 
     }
 
+    public ListadoInterface.Presenter getPresenter() {
+        return presenter;
+    }
+
     @Override
     public void lanzarFormulario(int id) {
         if(id==-1){
@@ -139,6 +149,7 @@ public class ListadoActivity extends AppCompatActivity implements ListadoInterfa
                 FormularioActivity.class);
         startActivity(intent);
     }
+
 
     public void search(){
         Intent intent=new Intent(ListadoActivity.this,
@@ -152,5 +163,37 @@ public class ListadoActivity extends AppCompatActivity implements ListadoInterfa
                 AboutUsActivity.class);
         this.onPause();
         startActivity(intent);
+    }
+
+    @Override
+    public void showDeleteItemDialog(final int itemSelected) {
+        AlertDialog dialog;
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder.setTitle("¿Seguro de que desea eliminar?")
+                .setMessage("No podra recuperar sus datos")
+                .setPositiveButton("Eliminar",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                removeItemInList(itemSelected);
+                                Toast.makeText(ListadoActivity.this, "Elemento eliminado", Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                .setNegativeButton("Cancelar",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+
+        dialog = builder.create();
+        dialog.show();
+    }
+
+    public void removeItemInList(int index) {
+        this.items.remove(index);
+        this.adaptador.notifyDataSetChanged();
     }
 }

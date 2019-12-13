@@ -35,4 +35,9 @@ public class ListadoPresenter implements ListadoInterface.Presenter{
     public ArrayList<Person> getAllPeople(){
         return person.getAllPersons();
     }
+
+    @Override
+    public void onItemSwipped(int id) {
+        view.showDeleteItemDialog(id);
+    }
 }
