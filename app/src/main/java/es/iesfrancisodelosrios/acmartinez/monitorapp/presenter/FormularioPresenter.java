@@ -39,6 +39,10 @@ public class FormularioPresenter implements FormularioInterface.Presenter {
     }
 
     @Override
+    public void toExit(){
+        view.exit();
+    }
+    @Override
     public void onClickAddImage(Context myContext) {
         int ReadPremission= ContextCompat.checkSelfPermission(
                 myContext,

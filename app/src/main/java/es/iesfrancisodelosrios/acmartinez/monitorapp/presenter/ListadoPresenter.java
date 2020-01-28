@@ -1,5 +1,7 @@
 package es.iesfrancisodelosrios.acmartinez.monitorapp.presenter;
 
+import android.content.Context;
+
 import java.util.ArrayList;
 
 import es.iesfrancisodelosrios.acmartinez.monitorapp.interfaces.ListadoInterface;
@@ -11,9 +13,9 @@ public class ListadoPresenter implements ListadoInterface.Presenter{
     private ListadoInterface.View view;
     private PersonModel person;
 
-    public ListadoPresenter(ListadoInterface.View view) {
+    public ListadoPresenter(ListadoInterface.View view, Context context) {
         this.view = view;
-        this.person=new PersonModel();
+        this.person=new PersonModel(context);
     }
 
     @Override

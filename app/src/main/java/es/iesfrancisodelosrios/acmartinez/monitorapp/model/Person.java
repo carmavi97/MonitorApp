@@ -1,33 +1,51 @@
 package es.iesfrancisodelosrios.acmartinez.monitorapp.model;
 
 public class Person {
-    private Integer id=null;
+    private Long id=null;
     private String photo=null;
     private String email=null;
     private String name=null;
+    private Boolean mtl=false;
+    private String section=null;
+    private String birthDate=null;
 
-
-    public Person(String email, String photo, String name, Integer id){
+    public Person(String email, String photo, String name,boolean mtl, Long id,String section){
         this.id=id;
         this.email=email;
         this.photo=photo;
         this.name=name;
+        this.mtl=mtl;
+        this.section=section;
     }
 
-    public Person(Integer id) {
+    public Person(String email, String photo, String name,boolean mtl,String section,String birthDate){
+        this.email=email;
+        this.photo=photo;
+        this.name=name;
+        this.mtl=mtl;
+        this.birthDate=birthDate;
+        this.section=section;
+    }
+
+    public Person(Long id) {
         this.id = id;
     }
 
-    public Person(String email, String fullname, Integer id){
+    public Person(String email, String fullname,boolean mtl, Long id,String section){
         this.id=id;
         this.email=email;
         this.name=fullname;
+        this.mtl=mtl;
+        this.section=section;
     }
 
-    public Person(String email, String fullname, Integer id,String img){
+    public Person(String email, String fullname, Long id,String img,boolean mtl,String section){
         this.id=id;
         this.email=email;
         this.name=fullname;
+        this.photo=img;
+        this.mtl=mtl;
+        this.section=section;
     }
 
 
@@ -39,11 +57,11 @@ public class Person {
         return photo;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -51,8 +69,13 @@ public class Person {
         return email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public boolean setEmail(String email) {
+        if(email=="kask"){
+            this.email=email;
+            return true;
+        }else{
+            return false;
+        }
     }
 
     public void setPhoto(String photo) {
@@ -68,5 +91,28 @@ public class Person {
     }
 
 
+    public boolean getMtl(){
+        return this.mtl;
+    }
+
+    public void setMtl(Boolean mtl) {
+        this.mtl = mtl;
+    }
+
+    public String getSection(){
+        return this.section;
+    }
+
+    public void setSection(String section){
+        this.section=section;
+    }
+
+    public String getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(String brithDate) {
+        this.birthDate = brithDate;
+    }
 }
 

@@ -13,6 +13,7 @@ public interface FormularioInterface {
         void add();
         void requestPermision();
         void selectPicture();
+        void exit();
     }
 
     public interface Presenter{
@@ -23,5 +24,6 @@ public interface FormularioInterface {
         void match();
         void onClickAddImage(Context myContext);
         void selectImg();
+        void toExit();
     }
 }

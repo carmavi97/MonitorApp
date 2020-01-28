@@ -1,12 +1,11 @@
 package es.iesfrancisodelosrios.acmartinez.monitorapp.views;
 
-import android.content.ClipData;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -35,6 +34,7 @@ public class ListadoActivity extends AppCompatActivity implements ListadoInterfa
     private AcontecimientoAdapter adaptador;
     private ArrayList<Person> items=new ArrayList<Person>();
     private String TAG="MonitorApp";
+    private Context context=this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +43,7 @@ public class ListadoActivity extends AppCompatActivity implements ListadoInterfa
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("MonitorApp");
         setSupportActionBar(toolbar);
-        presenter= new ListadoPresenter(this);
+        presenter= new ListadoPresenter(this, context);
         // Inicializa el RecyclerView
         final RecyclerView recyclerView = (RecyclerView) findViewById(R.id.Lista);
 
@@ -58,7 +58,7 @@ public class ListadoActivity extends AppCompatActivity implements ListadoInterfa
                 // Acción al pulsar el elemento
                 int position = recyclerView.getChildAdapterPosition(v);
                 Log.d(TAG,"Click RV: "+ position+": "+String.valueOf(items.get(position).getId()));
-                presenter.onClickAdd(items.get(position).getId());
+                presenter.onClickAdd(items.get(position).getId().intValue());
             }
         });
 
@@ -144,10 +144,11 @@ public class ListadoActivity extends AppCompatActivity implements ListadoInterfa
             Intent intent=new Intent(ListadoActivity.this,
                     FormularioActivity.class);
             startActivity(intent);
+        }else {
+            Intent intent = new Intent(ListadoActivity.this,
+                    FormularioActivity.class);
+            startActivity(intent);
         }
-        Intent intent=new Intent(ListadoActivity.this,
-                FormularioActivity.class);
-        startActivity(intent);
     }
 
 

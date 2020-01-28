@@ -38,5 +38,27 @@
         android:layout_weight="1"
         android:text="id" />
 
+    <TextView
+        android:id="@+id/fnacimiento"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Nacimento" />
+
+    <TextView
+        android:id="@+id/seccion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="seccion" />
+
+    <CheckBox
+        android:id="@+id/MTL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:enabled="false"
+        android:text="@string/titulo" />
+
 
 </LinearLayout>
