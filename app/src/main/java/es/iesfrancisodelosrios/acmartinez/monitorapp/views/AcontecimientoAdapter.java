@@ -6,6 +6,7 @@ import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -80,24 +81,57 @@ public class AcontecimientoAdapter extends RecyclerView.Adapter<AcontecimientoAd
     public static class AcontecimientoViewHolder
             extends RecyclerView.ViewHolder {
 
-        private final TextView TextView_email;
+        private TextView TextView_email;
         private TextView TextView_id;
         private TextView TextView_nombre;
         private ImageView imageImageView;
+        private TextView TextView_lastName;
+        private CheckBox CheckBox_mtl;
+        private TextView TextView_fnaciemiento;
+        private TextView TextView_seccion;
 
         public AcontecimientoViewHolder(View itemView) {
             super(itemView);
             TextView_id = (TextView) itemView.findViewById(R.id.id);
             TextView_nombre = (TextView) itemView.findViewById(R.id.name);
             TextView_email = (TextView) itemView.findViewById(R.id.email);
+            TextView_lastName= itemView.findViewById(R.id.lastName);
+            CheckBox_mtl=itemView.findViewById(R.id.MTL);
+            TextView_fnaciemiento= (TextView) itemView.findViewById(R.id.fnacimiento);
+            TextView_seccion= (TextView) itemView.findViewById(R.id.seccion);
             imageImageView = (ImageView) itemView.findViewById(R.id.imageView);
         }
 
         public void AcontecimientoBind(@org.jetbrains.annotations.NotNull Person item) {
             if (item != null){
                 TextView_id.setText(item.getId().toString());
-                TextView_email.setText(item.getEmail());
-                TextView_nombre.setText(item.getFullname());
+                if(item.getEmail()!=null) {
+                    TextView_email.setText(item.getEmail());
+                }else{
+                    TextView_email.setText("No disponible");
+                }
+                if(item.getName()!=null) {
+                    TextView_nombre.setText(item.getName());
+                }else{
+                    TextView_nombre.setText("Unknow");
+                }
+                if(item.getBirthDate()!=null){
+                    TextView_fnaciemiento.setText(item.getBirthDate());
+                }else {
+                    TextView_fnaciemiento.setText("Unknow");
+                }
+                if(item.getLastName()!=null){
+                    TextView_lastName.setText(item.getLastName());
+                }else{
+                    TextView_lastName.setText("Unknow");
+                }
+                CheckBox_mtl.setChecked(item.getMtl());
+                if(item.getSection()!=null){
+                    TextView_seccion.setText(item.getSection());
+                }else{
+                    TextView_seccion.setText("Unknow");
+                }
+
                 if(item.getPhoto()!=null) {
                     byte[] decodedString = Base64.decode(item.getPhoto(), Base64.DEFAULT);
                     Bitmap decodedByte = BitmapFactory.decodeByteArray(
@@ -114,7 +148,10 @@ public class AcontecimientoAdapter extends RecyclerView.Adapter<AcontecimientoAd
                             decodedString.length);
                     imageImageView.setImageBitmap(decodedByte);
                 }
+
             }
         }
+
+
     }
 }

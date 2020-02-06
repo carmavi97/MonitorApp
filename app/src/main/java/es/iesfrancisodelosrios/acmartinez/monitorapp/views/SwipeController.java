@@ -73,11 +73,12 @@ class SwipeController extends ItemTouchHelper.Callback {
                 swipeBack = event.getAction() == MotionEvent.ACTION_CANCEL || event.getAction() == MotionEvent.ACTION_UP;
                 if (swipeBack) {
                     if (dX < -buttonWidth){
-                        parent.getPresenter().onItemSwipped(itemSwipped);
+                        parent.getPresenter().onItemSwippedRight(itemSwipped);
                         //createSimpleDialog(itemSwipped).show();
                         buttonShowedState = ButtonsState.RIGHT_VISIBLE;
                     }
                     else if (dX > buttonWidth){
+                        parent.getPresenter().onItemSwippedLeft(itemSwipped);
                         buttonShowedState  = ButtonsState.LEFT_VISIBLE;
                     }
 

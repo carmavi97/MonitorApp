@@ -34,12 +34,31 @@ public class ListadoPresenter implements ListadoInterface.Presenter{
     }
 
     @Override
-    public ArrayList<Person> getAllPeople(){
-        return person.getAllPersons();
+    public ArrayList<Person> initialicePeople(){
+        ArrayList<Person> items=new ArrayList<>();
+        items=person.getPersonList();
+        if(items.size()==0) {
+            person.generatePersons();
+            items=person.getPersonList();
+        }
+        return items;
     }
 
     @Override
-    public void onItemSwipped(int id) {
+    public ArrayList<Person> getAllPeople(){
+        ArrayList<Person> items=new ArrayList<>();
+        items=person.getPersonList();
+
+        return items;
+    }
+
+    @Override
+    public void onItemSwippedRight(int id) {
         view.showDeleteItemDialog(id);
+    }
+
+    @Override
+    public void onItemSwippedLeft(int id){
+        view.lanzarFormulario(id);
     }
 }

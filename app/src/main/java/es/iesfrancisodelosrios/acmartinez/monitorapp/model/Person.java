@@ -5,6 +5,7 @@ public class Person {
     private String photo=null;
     private String email=null;
     private String name=null;
+    private String lastName=null;
     private Boolean mtl=false;
     private String section=null;
     private String birthDate=null;
@@ -18,13 +19,14 @@ public class Person {
         this.section=section;
     }
 
-    public Person(String email, String photo, String name,boolean mtl,String section,String birthDate){
+    public Person(String email, String photo, String name, String lastName,boolean mtl,String section,String birthDate){
         this.email=email;
         this.photo=photo;
         this.name=name;
         this.mtl=mtl;
         this.birthDate=birthDate;
         this.section=section;
+        this.lastName=lastName;
     }
 
     public Person(Long id) {
@@ -69,24 +71,19 @@ public class Person {
         return email;
     }
 
-    public boolean setEmail(String email) {
-        if(email=="kask"){
-            this.email=email;
-            return true;
-        }else{
-            return false;
-        }
+    public void setEmail(String email) {
+        this.email=email;
     }
 
     public void setPhoto(String photo) {
         this.photo = photo;
     }
 
-    public String getFullname() {
+    public String getName() {
         return name;
     }
 
-    public void setFullname(String fullname) {
+    public void setName(String fullname) {
         this.name = fullname;
     }
 
@@ -113,6 +110,14 @@ public class Person {
 
     public void setBirthDate(String brithDate) {
         this.birthDate = brithDate;
+    }
+
+    public String getLastName(){
+        return this.lastName;
+    }
+
+    public void setLastName(String lastName){
+        this.lastName=lastName;
     }
 }
 
