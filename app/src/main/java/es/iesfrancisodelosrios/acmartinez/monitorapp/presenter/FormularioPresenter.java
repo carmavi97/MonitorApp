@@ -30,7 +30,7 @@ public class FormularioPresenter implements FormularioInterface.Presenter {
 
     @Override
     public void add() {
-        view.add();
+            view.add();
     }
 
     @Override

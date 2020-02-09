@@ -9,6 +9,8 @@ public class Person {
     private Boolean mtl=false;
     private String section=null;
     private String birthDate=null;
+    private String phone=null;
+    private String nif=null;
 
     public Person(String email, String photo, String name,boolean mtl, Long id,String section){
         this.id=id;
@@ -19,7 +21,7 @@ public class Person {
         this.section=section;
     }
 
-    public Person(String email, String photo, String name, String lastName,boolean mtl,String section,String birthDate){
+    public Person(String email, String photo, String name, String lastName,boolean mtl,String section,String birthDate, String phone, String nif){
         this.email=email;
         this.photo=photo;
         this.name=name;
@@ -27,6 +29,8 @@ public class Person {
         this.birthDate=birthDate;
         this.section=section;
         this.lastName=lastName;
+        this.phone=phone;
+        this.nif=nif;
     }
 
     public Person(Long id) {
@@ -118,6 +122,22 @@ public class Person {
 
     public void setLastName(String lastName){
         this.lastName=lastName;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getNif() {
+        return nif;
+    }
+
+    public void setNif(String nif) {
+        this.nif = nif;
     }
 }
 

@@ -51,8 +51,14 @@ public class ListadoActivity extends AppCompatActivity implements ListadoInterfa
         final RecyclerView recyclerView = (RecyclerView) findViewById(R.id.Lista);
 
         // Crea el Adaptador con los datos de la lista anterior
-        items= presenter.initialicePeople();
-        adaptador = new AcontecimientoAdapter(presenter.getAllPeople());
+        if(getIntent().getStringArrayExtra("EXTRA_ARGS")==null) {
+            items= presenter.initialicePeople();
+            adaptador = new AcontecimientoAdapter(presenter.getAllPeople());
+
+        }else{
+            items=presenter.search(getIntent().getStringArrayExtra("EXTRA_ARGS"));
+            adaptador = new AcontecimientoAdapter(presenter.search(getIntent().getStringArrayExtra("EXTRA_ARGS")));
+        }
         TextView contador=findViewById(R.id.contadorTextView);
         contador.setText("Hay "+items.size()+" resultados");
         // Asocia el elemento de la lista con una acción al ser pulsado
@@ -141,9 +147,21 @@ public class ListadoActivity extends AppCompatActivity implements ListadoInterfa
         super.onResume();
         final RecyclerView recyclerView = (RecyclerView) findViewById(R.id.Lista);
 
+
+        if(getIntent().getStringArrayExtra("EXTRA_ARGS")==null) {
+            items= presenter.initialicePeople();
+            adaptador = new AcontecimientoAdapter(presenter.getAllPeople());
+
+        }else{
+
+            items=presenter.search(getIntent().getStringArrayExtra("EXTRA_ARGS"));
+
+            adaptador = new AcontecimientoAdapter(presenter.search(getIntent().getStringArrayExtra("EXTRA_ARGS")));
+        }
+
         // Crea el Adaptador con los datos de la lista anterior
-        items= presenter.getAllPeople();
-        adaptador = new AcontecimientoAdapter(presenter.getAllPeople());
+
+
         TextView contador=findViewById(R.id.contadorTextView);
         contador.setText("Hay "+items.size()+" resultados");
         // Asocia el elemento de la lista con una acción al ser pulsado

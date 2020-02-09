@@ -53,6 +53,20 @@
         android:text="@string/date" />
 
     <TextView
+        android:id="@+id/nif"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/dni" />
+
+    <TextView
+        android:id="@+id/phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/telefono" />
+
+    <TextView
         android:id="@+id/seccion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

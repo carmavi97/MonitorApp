@@ -53,6 +53,13 @@ public class ListadoPresenter implements ListadoInterface.Presenter{
     }
 
     @Override
+    public ArrayList<Person> search(String[] args){
+        ArrayList<Person> items=new ArrayList<>();
+        items=person.select(args);
+        return items;
+    }
+
+    @Override
     public void onItemSwippedRight(int id) {
         view.showDeleteItemDialog(id);
     }

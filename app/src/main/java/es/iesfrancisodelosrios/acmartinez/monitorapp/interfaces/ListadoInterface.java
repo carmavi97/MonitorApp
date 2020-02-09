@@ -27,5 +27,6 @@ public interface ListadoInterface {
         void onItemSwippedRight(int id);
         void onItemSwippedLeft(int id);
         public ArrayList<Person> initialicePeople();
-    }
+        public ArrayList<Person> search(String[] args);
+     }
 }

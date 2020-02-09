@@ -89,6 +89,9 @@ public class AcontecimientoAdapter extends RecyclerView.Adapter<AcontecimientoAd
         private CheckBox CheckBox_mtl;
         private TextView TextView_fnaciemiento;
         private TextView TextView_seccion;
+        private TextView TextView_phone;
+        private TextView TextView_nif;
+
 
         public AcontecimientoViewHolder(View itemView) {
             super(itemView);
@@ -99,7 +102,10 @@ public class AcontecimientoAdapter extends RecyclerView.Adapter<AcontecimientoAd
             CheckBox_mtl=itemView.findViewById(R.id.MTL);
             TextView_fnaciemiento= (TextView) itemView.findViewById(R.id.fnacimiento);
             TextView_seccion= (TextView) itemView.findViewById(R.id.seccion);
+            TextView_nif= (TextView) itemView.findViewById(R.id.nif);
+            TextView_phone= (TextView) itemView.findViewById(R.id.phone);
             imageImageView = (ImageView) itemView.findViewById(R.id.imageView);
+
         }
 
         public void AcontecimientoBind(@org.jetbrains.annotations.NotNull Person item) {
@@ -131,7 +137,16 @@ public class AcontecimientoAdapter extends RecyclerView.Adapter<AcontecimientoAd
                 }else{
                     TextView_seccion.setText("Unknow");
                 }
-
+                if(item.getNif()!=null){
+                    TextView_nif.setText(item.getNif());
+                }else{
+                    TextView_nif.setText("Unknow");
+                }
+                if(item.getPhone()!=null){
+                    TextView_phone.setText(item.getPhone());
+                }else{
+                    TextView_phone.setText("Unknow");
+                }
                 if(item.getPhoto()!=null) {
                     byte[] decodedString = Base64.decode(item.getPhoto(), Base64.DEFAULT);
                     Bitmap decodedByte = BitmapFactory.decodeByteArray(
