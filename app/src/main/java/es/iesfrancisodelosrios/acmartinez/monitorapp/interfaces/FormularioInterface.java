@@ -3,6 +3,10 @@ package es.iesfrancisodelosrios.acmartinez.monitorapp.interfaces;
 import android.content.Context;
 import android.widget.EditText;
 
+import java.util.ArrayList;
+
+import es.iesfrancisodelosrios.acmartinez.monitorapp.model.Person;
+
 public interface FormularioInterface {
 
     public interface View{
@@ -14,6 +18,7 @@ public interface FormularioInterface {
         void requestPermision();
         void selectPicture();
         void exit();
+
     }
 
     public interface Presenter{
@@ -25,5 +30,9 @@ public interface FormularioInterface {
         void onClickAddImage(Context myContext);
         void selectImg();
         void toExit();
+        void update(Person p);
+        void insert(Person p);
+        ArrayList<String> getSpinner();
+        Person selectById(long id);
     }
 }

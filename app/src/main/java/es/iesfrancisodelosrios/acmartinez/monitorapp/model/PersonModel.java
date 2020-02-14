@@ -33,7 +33,7 @@ public class PersonModel extends SQLiteOpenHelper {
     private static final String GET_ALL="SELECT * FROM persona";
     private static final String GET_ID="SELECT * FROM persona WHERE id=?";
     private static final String DELETE="DELETE FROM persona WHERE id=?";
-    private static final String SEARCH="SELECT * FROM persona WHERE "+KEY_PERSONA_NAME+" LIKE ? AND "+KEY_PERSONA_SECCION
+    private static final String SEARCH="SELECT DISTINCT * FROM persona WHERE "+KEY_PERSONA_NAME+" LIKE ? AND "+KEY_PERSONA_SECCION
             +" LIKE ? AND "+KEY_PERSONA_DATE+" LIKE ?";
     private static  final String SPINER="SELECT DISTINCT "+KEY_PERSONA_SECCION+" FROM "+TABLE_PERSONA;
 
@@ -302,13 +302,14 @@ public class PersonModel extends SQLiteOpenHelper {
         }
         return secciones;
     }
-    public  ArrayList<Person> select(String[] args){
-        Person p=new Person();
+    public  ArrayList<Person> search(String[] args){
+
         ArrayList<Person> items=new ArrayList<>();
         SQLiteDatabase db=getWritableDatabase();
         Cursor c = db.rawQuery(SEARCH, args);
         if(c.moveToFirst()) {
             do {
+                Person p = new Person();
                 p.setId(c.getLong(c.getColumnIndex(KEY_PERSONA_ID)));
                 p.setName(c.getString(c.getColumnIndex(KEY_PERSONA_NAME)));
                 if (c.getInt(c.getColumnIndex(KEY_PERSONA_MTL)) == 0) {
@@ -323,7 +324,7 @@ public class PersonModel extends SQLiteOpenHelper {
                 p.setNif(c.getString(c.getColumnIndex(KEY_PERSONA_NIF)));
                 p.setPhone(c.getString(c.getColumnIndex(KEY_PERSONA_PHONE)));
                 items.add(p);
-            }while(c.moveToNext());
+            } while (c.moveToNext());
         }
         return items;
     }

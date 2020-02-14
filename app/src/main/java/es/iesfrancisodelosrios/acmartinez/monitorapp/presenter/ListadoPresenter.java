@@ -44,6 +44,7 @@ public class ListadoPresenter implements ListadoInterface.Presenter{
         return items;
     }
 
+
     @Override
     public ArrayList<Person> getAllPeople(){
         ArrayList<Person> items=new ArrayList<>();
@@ -53,10 +54,15 @@ public class ListadoPresenter implements ListadoInterface.Presenter{
     }
 
     @Override
-    public ArrayList<Person> search(String[] args){
+    public ArrayList<Person> doSearch(String[] args){
         ArrayList<Person> items=new ArrayList<>();
-        items=person.select(args);
+        items=person.search(args);
         return items;
+    }
+
+    @Override
+    public void delete(long id) {
+        person.delete(id);
     }
 
     @Override

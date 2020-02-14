@@ -17,16 +17,19 @@ public interface ListadoInterface {
 
         void showDeleteItemDialog(int id);
 
+        void removeItemInList(int index);
+
     }
 
     public interface Presenter{
         void onClickAdd(Integer id);
         void search();
+        ArrayList<Person> doSearch(String[] args);
         void about();
         ArrayList<Person> getAllPeople();
         void onItemSwippedRight(int id);
         void onItemSwippedLeft(int id);
         public ArrayList<Person> initialicePeople();
-        public ArrayList<Person> search(String[] args);
+        void delete(long id);
      }
 }

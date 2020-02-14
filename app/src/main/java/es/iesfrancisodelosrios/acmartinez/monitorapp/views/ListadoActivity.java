@@ -18,7 +18,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,12 +26,11 @@ import java.util.ArrayList;
 import es.iesfrancisodelosrios.acmartinez.monitorapp.R;
 import es.iesfrancisodelosrios.acmartinez.monitorapp.interfaces.ListadoInterface;
 import es.iesfrancisodelosrios.acmartinez.monitorapp.model.Person;
-import es.iesfrancisodelosrios.acmartinez.monitorapp.model.PersonModel;
 import es.iesfrancisodelosrios.acmartinez.monitorapp.presenter.ListadoPresenter;
 
 public class ListadoActivity extends AppCompatActivity implements ListadoInterface.View{
 
-    private  PersonModel pm;
+
     private ListadoInterface.Presenter presenter;
     private AcontecimientoAdapter adaptador;
     private ArrayList<Person> items=new ArrayList<Person>();
@@ -56,8 +54,8 @@ public class ListadoActivity extends AppCompatActivity implements ListadoInterfa
             adaptador = new AcontecimientoAdapter(presenter.getAllPeople());
 
         }else{
-            items=presenter.search(getIntent().getStringArrayExtra("EXTRA_ARGS"));
-            adaptador = new AcontecimientoAdapter(presenter.search(getIntent().getStringArrayExtra("EXTRA_ARGS")));
+            items=presenter.doSearch(getIntent().getStringArrayExtra("EXTRA_ARGS"));
+            adaptador = new AcontecimientoAdapter(items);
         }
         TextView contador=findViewById(R.id.contadorTextView);
         contador.setText("Hay "+items.size()+" resultados");
@@ -89,7 +87,7 @@ public class ListadoActivity extends AppCompatActivity implements ListadoInterfa
         SwipeController swipeController = new SwipeController(this);
         ItemTouchHelper itemTouchhelper = new ItemTouchHelper(swipeController);
         itemTouchhelper.attachToRecyclerView(recyclerView);
-        pm=new PersonModel(this);
+
     }
 
     @Override
@@ -154,9 +152,9 @@ public class ListadoActivity extends AppCompatActivity implements ListadoInterfa
 
         }else{
 
-            items=presenter.search(getIntent().getStringArrayExtra("EXTRA_ARGS"));
+            items=presenter.doSearch(getIntent().getStringArrayExtra("EXTRA_ARGS"));
 
-            adaptador = new AcontecimientoAdapter(presenter.search(getIntent().getStringArrayExtra("EXTRA_ARGS")));
+            adaptador = new AcontecimientoAdapter(items);
         }
 
         // Crea el Adaptador con los datos de la lista anterior
@@ -180,6 +178,37 @@ public class ListadoActivity extends AppCompatActivity implements ListadoInterfa
 
         // Muestra el RecyclerView en vertical
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        super.onActivityResult(requestCode,resultCode,data);
+        if(requestCode==1) {
+            if(resultCode==RESULT_OK) {
+                final RecyclerView recyclerView = (RecyclerView) findViewById(R.id.Lista);
+                items = presenter.doSearch(getIntent().getStringArrayExtra("EXTRA_ARGS"));
+
+                adaptador = new AcontecimientoAdapter(items);
+                TextView contador = findViewById(R.id.contadorTextView);
+                contador.setText("Hay " + items.size() + " resultados");
+                // Asocia el elemento de la lista con una acción al ser pulsado
+                adaptador.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        // Acción al pulsar el elemento
+                        int position = recyclerView.getChildAdapterPosition(v);
+                        Log.d(TAG, "Click RV: " + position + ": " + String.valueOf(items.get(position).getId()));
+                        presenter.onClickAdd(items.get(position).getId().intValue());
+                    }
+                });
+
+                // Asocia el Adaptador al RecyclerView
+                recyclerView.setAdapter(adaptador);
+
+                // Muestra el RecyclerView en vertical
+                recyclerView.setLayoutManager(new LinearLayoutManager(this));
+            }
+        }
     }
 
     @Override
@@ -264,11 +293,11 @@ public class ListadoActivity extends AppCompatActivity implements ListadoInterfa
         dialog = builder.create();
         dialog.show();
     }
-
+    @Override
     public void removeItemInList(int index) {
         Person toDelete=items.get(index);
         this.items.remove(index);
-        pm.delete(toDelete.getId());
+        presenter.delete(toDelete.getId());
         this.adaptador.notifyDataSetChanged();
         final RecyclerView recyclerView = (RecyclerView) findViewById(R.id.Lista);
 

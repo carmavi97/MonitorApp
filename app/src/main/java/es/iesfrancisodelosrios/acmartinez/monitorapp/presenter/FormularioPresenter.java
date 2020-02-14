@@ -8,14 +8,20 @@ import android.widget.EditText;
 
 import androidx.core.content.ContextCompat;
 
+import java.util.ArrayList;
+
 import es.iesfrancisodelosrios.acmartinez.monitorapp.interfaces.FormularioInterface;
+import es.iesfrancisodelosrios.acmartinez.monitorapp.model.Person;
+import es.iesfrancisodelosrios.acmartinez.monitorapp.model.PersonModel;
 
 public class FormularioPresenter implements FormularioInterface.Presenter {
 
     private FormularioInterface.View view;
+    private PersonModel pm;
+    public FormularioPresenter(FormularioInterface.View view, Context context) {
 
-    public FormularioPresenter(FormularioInterface.View view) {
         this.view = view;
+        this.pm=new PersonModel(context);
     }
 
     @Override
@@ -31,6 +37,7 @@ public class FormularioPresenter implements FormularioInterface.Presenter {
     @Override
     public void add() {
             view.add();
+
     }
 
     @Override
@@ -42,6 +49,29 @@ public class FormularioPresenter implements FormularioInterface.Presenter {
     public void toExit(){
         view.exit();
     }
+
+    @Override
+    public void update(Person p) {
+        pm.update(p);
+    }
+
+    @Override
+    public void insert(Person p) {
+        pm.insert(p);
+    }
+
+    @Override
+    public ArrayList<String> getSpinner() {
+        ArrayList spinner=pm.getSpinner();
+        return spinner;
+    }
+
+    @Override
+    public Person selectById(long id) {
+        Person p=pm.selectById(id);
+        return p;
+    }
+
     @Override
     public void onClickAddImage(Context myContext) {
         int ReadPremission= ContextCompat.checkSelfPermission(
