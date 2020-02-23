@@ -9,6 +9,8 @@ import android.util.Log;
 
 import java.util.ArrayList;
 
+import es.iesfrancisodelosrios.acmartinez.monitorapp.views.MyApplication;
+
 public class PersonModel extends SQLiteOpenHelper {
 
     // Database Info
@@ -37,10 +39,18 @@ public class PersonModel extends SQLiteOpenHelper {
             +" LIKE ? AND "+KEY_PERSONA_DATE+" LIKE ?";
     private static  final String SPINER="SELECT DISTINCT "+KEY_PERSONA_SECCION+" FROM "+TABLE_PERSONA;
 
+    private static PersonModel instance;
+
     public PersonModel(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
+    static public PersonModel getInstance(){
+        if(instance==null){
+            instance=new PersonModel(MyApplication.getContext());
+        }
+        return instance;
+    }
 
     private String TAG="MonitorApp";
     @Override
@@ -195,7 +205,8 @@ public class PersonModel extends SQLiteOpenHelper {
         }
     }
 
-    public long insert(Person persona){
+    public boolean insert(Person persona){
+        boolean added=false;
         SQLiteDatabase db=getWritableDatabase();
         ContentValues nuevoRegistro = new ContentValues();
         nuevoRegistro.put(KEY_PERSONA_NAME, persona.getName());
@@ -207,14 +218,18 @@ public class PersonModel extends SQLiteOpenHelper {
         nuevoRegistro.put(KEY_PERSONA_PROFILE_PICTURE, persona.getPhoto());
         nuevoRegistro.put(KEY_PERSONA_NIF, persona.getNif());
         nuevoRegistro.put(KEY_PERSONA_PHONE, persona.getPhone());
-
-        long id=db.insert(TABLE_PERSONA, null, nuevoRegistro);
+        long id=-1;
+        id=db.insert(TABLE_PERSONA, null, nuevoRegistro);
+        if(id!=-1){
+            added=true;
+        }
         persona.setId(id);
-        return id;
+        return added;
     }
 
-    public void update(Person persona){
+    public boolean update(Person persona){
         SQLiteDatabase db=getWritableDatabase();
+        boolean updated=false;
         ContentValues nuevoRegistro = new ContentValues();
         nuevoRegistro.put(KEY_PERSONA_NAME, persona.getName());
         nuevoRegistro.put(KEY_PERSONA_LASTNAME, persona.getLastName());
@@ -227,7 +242,11 @@ public class PersonModel extends SQLiteOpenHelper {
         nuevoRegistro.put(KEY_PERSONA_PHONE, persona.getPhone());
         String[] args=new String[1];
         args[0]=String.valueOf(persona.getId());
-        db.update(TABLE_PERSONA, nuevoRegistro, "id = "+persona.getId(),null);
+        Integer id=db.update(TABLE_PERSONA, nuevoRegistro, "id = "+persona.getId(),null);
+        if(id!=null){
+            updated=true;
+        }
+        return updated;
     }
 
 //id nombre apellido email fecha seccion mtl foto
@@ -282,13 +301,17 @@ public class PersonModel extends SQLiteOpenHelper {
         return p;
     }
 
-    public void delete(Long id){
+    public boolean delete(Long id){
+        boolean deleted=false;
         SQLiteDatabase db=getWritableDatabase();
         String[] args=new String[1];
         args[0]=String.valueOf(id);
         Log.d(TAG,String.valueOf(id));
         db.execSQL(DELETE, args);
-
+        if(this.selectById(id)==null){
+            deleted=true;
+        }
+        return deleted;
     }
     public ArrayList<String> getSpinner(){
         SQLiteDatabase db=getWritableDatabase();
