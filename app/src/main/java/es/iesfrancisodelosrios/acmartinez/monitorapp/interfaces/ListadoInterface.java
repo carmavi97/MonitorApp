@@ -15,6 +15,8 @@ public interface ListadoInterface {
 
         void about();
 
+        void help();
+
         void showDeleteItemDialog(int id);
 
         void removeItemInList(int index);
@@ -31,5 +33,6 @@ public interface ListadoInterface {
         void onItemSwippedLeft(int id);
         public ArrayList<Person> initialicePeople();
         void delete(long id);
+    void ayuda();
      }
 }

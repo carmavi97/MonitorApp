@@ -45,12 +45,6 @@ public class PersonModel extends SQLiteOpenHelper {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
-    static public PersonModel getInstance(){
-        if(instance==null){
-            instance=new PersonModel(MyApplication.getContext());
-        }
-        return instance;
-    }
 
     private String TAG="MonitorApp";
     @Override

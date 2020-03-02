@@ -29,6 +29,11 @@ public class ListadoPresenter implements ListadoInterface.Presenter{
     }
 
     @Override
+    public void ayuda() {
+        view.help();
+    }
+
+    @Override
     public void about() {
         view.about();
     }

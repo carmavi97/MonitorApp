@@ -103,8 +103,8 @@ public class ListadoActivity extends AppCompatActivity implements ListadoInterfa
             case R.id.action_buscar:
                 presenter.search();
                 return true;
-            case R.id.action_Sobre:
-
+            case R.id.action_Ayuda:
+                presenter.ayuda();
                 return true;
 
             default:
@@ -263,6 +263,13 @@ public class ListadoActivity extends AppCompatActivity implements ListadoInterfa
     public void about(){
         Intent intent=new Intent(ListadoActivity.this,
                 AboutUsActivity.class);
+        this.onPause();
+        startActivity(intent);
+    }
+
+    public void help(){
+        Intent intent=new Intent(ListadoActivity.this,
+                helpActivity.class);
         this.onPause();
         startActivity(intent);
     }
